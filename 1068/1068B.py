@@ -13,7 +13,6 @@ def p_fact(n):
     dividor = 2
     lim = int(n ** 0.5) + 1
     while n > 1 and dividor < lim:
-        print(n, dividor)
         while n % dividor == 0:
             factors.append(dividor)
             n //= dividor
@@ -24,4 +23,16 @@ def p_fact(n):
 
 prime_factors = p_fact(int(input()))
 
-print(prime_factors)
+ways = 1
+#end stop for the for-loop
+prime_factors.append(-1)
+this_factor_count = 0
+for i, f in enumerate(prime_factors[:-1]):
+    this_factor_count += 1
+    if f != prime_factors[i+1]:
+        #we can pick factors as many times as there
+        #are factors + 1 since we can pick no factors
+        ways *= this_factor_count + 1
+        this_factor_count = 0
+
+print(ways)
